@@ -1,107 +1,103 @@
 "use strict"; 
-let submissions = [
-        {
-          name: "Jane",
-          score: 95,
-          date: "2020-01-24",
-          passed: true,
-        },
-        {
-          name: "Joe",
-          score: 77,
-          date: "2018-05-14",
-          passed: true,
-        },
-        {
-          name: "Jack",
-          score: 59,
-          date: "2019-07-05",
-          passed: false,
-        },
-        {
-            name: "Jill",
-            score: 88,
-            date: "2020-04-22",
-            passed: true,
-          }
+const submissions = [
+    {
+        name: "Jane",
+        score: 95,
+        date: "2020-01-24",
+        passed: true,
+    },
+    {
+        name: "Joe",
+        score: 77,
+        date: "2020-01-24",
+        passed: true,
+    },
+    {
+        name: "Jack",
+        score: 59,
+        date: "2020-01-24",
+        passed: false,
+    },
+    {
+        name: "Jill",
+        score: 88,
+        date: "2020-01-24",
+        passed: true,
+    }
 ];
 console.log(submissions); 
-// 2
+console.log("---------add submission--------");
 const addSubmission = (array,newName,newScore,newDate) => {
-    const newSubmission = {
-        name: newName,
+    let newStudent = {
+        name : newName,
         score: newScore,
         date: newDate,
-        passed: newScore >= 60,
-    };
-    array.push(newSubmission); 
+        passed: newScore >= 60
+    }
+    array.push(newStudent);
 };
-addSubmission(submissions,"hulk", 30,"2020-04-21");
+addSubmission(submissions,"Jimi Nuetron",40,"2020-04-18");
 console.log(submissions); 
-
-//3
+console.log("---------delete by index--------");
 const deleteSubmissionByIndex = (array,index) => {
-    array.splice(index,1); 
+    array.splice(index, 1); 
 };
-deleteSubmissionByIndex(submissions,1); 
+deleteSubmissionByIndex(submissions,4);
 console.log(submissions); 
-//4
+console.log("---------delete by name--------");
 const deleteSubmissionByName = (array,name) => {
-    let destroy = array.findIndex((student) => {
-        return student.name === name; 
+    let destroy = array.findIndex((remove) => {
+        return remove.name === name; 
     });
     array.splice(destroy,1); 
-}
-deleteSubmissionByName(submissions,"hulk");
+};
+deleteSubmissionByName(submissions,"Jill"); 
 console.log(submissions); 
-//5
+console.log("---------edit submission--------");
 const editSubmission = (array,index,score) => {
-    array[index].score = score; 
+    array[index].score = score;
     array[index].passed = score >= 60;
 };
-editSubmission(submissions,0,120);
+editSubmission(submissions,1,130); 
 console.log(submissions); 
-//6
+console.log("---------find submission by name--------");
 const findSubmissionByName = (array,name) => {
-    return array.find((studentName) => {
-        return studentName.name === name; 
+    return array.find((student) => {
+        return student.name === name;
     });
-}
-console.log(findSubmissionByName(submissions,"Jane")); 
-//7
+};
+console.log(findSubmissionByName(submissions,"Jane"));
+console.log("---------find lowest score--------"); 
 const findLowestScore = (array) => {
-    let currentLowestScore = array[0]; 
-    array.forEach((items) => {
-        if (currentLowestScore.score > items.score) {
-            currentLowestScore = items;
+    let initialLowestScore = array[0];
+    array.forEach((currentLowest) => {
+        if (initialLowestScore.score > currentLowest.score) {
+            initialLowestScore = currentLowest;
         };
     });
-    return currentLowestScore; 
-}
+    return initialLowestScore;
+};
 console.log(findLowestScore(submissions)); 
-//8
-const findAverageScore = () => {
-    // for (let human of gcClass) {
-    //     sum+=human.excitementLevel;
-    // }
-    let sum = 0; 
-    for (let studentScore of submissions) {
-        sum+=studentScore.score; 
+console.log("---------find average score--------");
+const findAverageScore = (array) => {
+    let sum = 0;
+    for(let totalAvg of submissions) {
+        sum += totalAvg.score;
     }
-    return sum / submissions.length;
-}
-console.log(findAverageScore()); 
-//9 
+    return sum / submissions.length; 
+};
+console.log(findAverageScore(submissions)); 
+console.log("---------filter passing--------");
 const filterPassing = (array) => {
-    return array.filter((passers) => {
-        return passers.passed === true; 
+    return array.filter((success) => {
+        return success.passed === true;
     });
-}
+};
 console.log(filterPassing(submissions)); 
-//10
+console.log("---------filter 90 above--------");
 const filter90AndAbove = (array) => {
     return array.filter((aboveAvg) => {
         return aboveAvg.score >= 90; 
     });
-}
+};
 console.log(filter90AndAbove(submissions)); 
